@@ -29,10 +29,6 @@ and the console output."/>
 
 ### NOT YET USABLE
 
-### Using The Playground
-### Installation
-### API
-### Working With The Code Base
 ----
 
 ### Why Another PDP-11 Emulator
@@ -84,6 +80,19 @@ macros and the sectioning control.
   emulation of the processor. There's no I/O subsystem or memory management
   unit, so it will not boot the DEC operating systems.
 
+# For Users of the Playground
+
+### Using The Playground
+
+# Adding the Playground to Your Site
+
+### Installation
+### API
+
+
+# Contributing to this Repo
+
+### Working With The Code Base
 
 ### Author
 
