@@ -33,10 +33,10 @@ and the console output."/>
 
 ### Why Another PDP-11 Emulator
 
-I'm creating a course about how computers work. Part of it looks at the internal
+I'm creating a course about how computers work. Part of it looks at internal
 architecture, machine code, memory, registers, processor status, and so on.
 
-The PDP-11 is an elegant, simple, and surprisingly complete machine, that lets
+The PDP-11 is an elegant, simple, and surprisingly complete machine. It lets
 me talk about these things without getting in the way.
 
 The only in-browser emulators I could find were either so realistic that they
@@ -50,7 +50,7 @@ Create webpages containing placeholder `div`s and point this library at them.
 The library will create an editor window, a machine status area, and a set of
 control buttons.
 
-The editor knows about PDP-11 assembler syntax, and preforms incremental
+The editor knows about PDP-11 assembler syntax, and performs incremental
 assembly as you type. When it encounters a syntax error, it tries to show you
 just the text in error:
 
