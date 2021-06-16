@@ -58,11 +58,11 @@ just the text in error:
 error"/>
 
 Whenever the source code assembles cleanly, the playground is ready to run the
-code. It shows STEP/RUN/RESET buttons, and the contents of the processor
+code. It shows STEP/RUN/RESET buttons and the contents of the processor
 registers (including the PSW).
 
 As you step through the code the currently executing line is highlighted in the
-editor, and the registers and memory dump (at the left of the source code) show
+editor. The registers and memory dump (at the left of the source code) show
 when locations are read and written, along with their new values.
 
 Clicking on a line number sets a breakpoint.
@@ -74,11 +74,13 @@ basic console output macros (`.ttyout` and `.print`).
 ### What This Is Not
 
 * The built-in assembler is based on DEC's Macro-11 Assembler, but without the
-macros and the sectioning control.
+  macros and the sectioning control.
 
 * The PDP-11 Playground is not a complete PDP-11 computer; it's just an
   emulation of the processor. There's no I/O subsystem or memory management
-  unit, so it will not boot the DEC operating systems.
+  unit, so it will not boot DEC operating systems.
+
+----
 
 # For Users of the Playground
 
