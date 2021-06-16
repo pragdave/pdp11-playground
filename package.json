@@ -1,0 +1,21 @@
+{
+  "name": "svelte-app",
+  "version": "1.0.0",
+  "private": true,
+  "entry": "src/main.js",
+  "scripts": {
+    "dev": "parcel src/index.html"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.0.0-beta.2",
+    "eslint": "^7.22.0",
+    "eslint-config-minimal": "^0.4.2",
+    "sass": "^1.34.1"
+  },
+  "dependencies": {
+    "assets": "^3.0.1",
+    "codemirror": "^5.60.0",
+    "m11": "file:../m11",
+    "redom": "^3.27.1"
+  }
+}

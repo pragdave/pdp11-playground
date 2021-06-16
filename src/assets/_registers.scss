@@ -1,0 +1,59 @@
+  .registers {
+    margin-top: 3vh;
+    padding-top: 1vh;
+    margin-bottom: 1vh;
+    display: flex;
+  }
+
+
+  .register {
+    position: relative;
+    width: 10%;
+    max-width: 3.0rem;
+    text-align: right;
+    padding: 0 7px;
+    height: 1.5em;
+    border-left: 0.5px solid $border;
+    border-bottom: 0.5px solid $border;
+    transition-property: background;
+    transition-duration: 1s;
+    &.psw {
+      width: 12.5%;
+      max-width: 4rem;
+      border-right: 0.5px solid $border;
+      .value {
+        letter-spacing: 0.3em;
+      }
+    }
+  }
+
+  .register::before {
+    display: block;
+    content: '';
+    width: 20%;
+    position: absolute;
+    left: -1px;
+    border-top: 0.5px solid $border;
+
+  }
+
+  .value {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0.5em;
+    font-size: 70%;
+    color: $register-color;
+  }
+
+
+  legend {
+    display: block;
+    position: absolute;
+    font-size: 50%;
+    top: 0.15em;
+    left: 0.15em;
+    color: $legend;
+  }
+
+

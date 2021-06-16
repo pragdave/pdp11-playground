@@ -1,0 +1,8 @@
+$fp-purple: darken(#7B2C44, 10%);
+$fp-red:    lighten(#B3353B, 20%);
+
+@import "codemirror";
+
+@import "overall";
+@import "highlightChanges";
+@import "frontpanel";

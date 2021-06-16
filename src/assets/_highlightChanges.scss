@@ -1,0 +1,75 @@
+$READ_COLOR: #253;
+$WRITE_COLOR: #732;
+$DURATION: 2s;
+
+.pdp11-window {
+
+  .WR, .RW {
+    animation-name: flashWR;
+    animation-duration: $DURATION;
+  }
+
+
+  @keyframes flashWR {
+    from {
+      background: transparent;
+    }
+
+    40% {
+      background: $READ_COLOR;
+    }
+
+    60% {
+      background: $WRITE_COLOR;
+    }
+
+    to {
+      background: transparent;
+    }
+  }
+
+  // -----
+
+  .R {
+    animation-name: flash-R;
+    animation-duration: $DURATION;
+  }
+
+
+  @keyframes flash-R {
+    from {
+      background: transparent;
+    }
+
+    30% {
+      background: $READ_COLOR;
+    }
+
+    to {
+      background: transparent;
+    }
+  }
+
+  // -----
+
+  .W {
+    animation-name: flash-W;
+    animation-duration: $DURATION;
+  }
+
+
+  @keyframes flash-W {
+    from {
+      background: transparent;
+    }
+
+    30% {
+      background: $WRITE_COLOR;
+    }
+
+    to {
+      background: transparent;
+    }
+  }
+
+}

@@ -1,0 +1,9 @@
+{
+  "extends": "minimal",
+  "rules": {
+    "no-multi-spaces": "off",
+    "no-else-return": "off",
+    "indent": ["warn", 2, { "SwitchCase": 1 }],
+    "no-unused-vars": [2, {"args": "all", "argsIgnorePattern": "^_"}]
+   }
+}
