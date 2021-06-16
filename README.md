@@ -1,8 +1,10 @@
+### NOT YET USABLE
+
 # PDP-11 Playground
 
 An(other) implementation of a PDP-11 assembler and emulator that runs in the browser.
 
-Unlike the others, this version doesn't require an operating system, and it
+Unlike the others, this version doesn't require an operating system, and it is
 designed to give more meaningful errors. It also features breakpoints, and it
 can switch from the deult octal representation to either decimal or hex for
 anyone born after 1970.
@@ -13,21 +15,19 @@ and the console output."/>
 
 ## TL:DR
 
-### For End-Users
+#### For End-Users
 
 * [How to Use the Playground](#using-the-playground)
 
-### For Developers
+#### For Developers
 
 * [Installation](#installation)
 * [API](#API)
 
-### For Folks Who Want To Hack the Code
+#### For Folks Who Want To Hack the Code
 
 * [Working with the Code Base](#working-with-the-code-base)
 
-
-### NOT YET USABLE
 
 ----
 
