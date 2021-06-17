@@ -31,7 +31,7 @@ and the console output."/>
 
 ----
 
-### Why Another PDP-11 Emulator
+### Why Another PDP-11 Emulator?
 
 I'm creating a course about how computers work. Part of it looks at internal
 architecture, machine code, memory, registers, processor status, and so on.
