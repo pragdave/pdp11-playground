@@ -1,6 +1,6 @@
 {
   "name": "pdp11-playground",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "MIT",
   "author": "Dave Thomas <dave@pragdave.me> (https://pragdave.me)",
   "repository": "github:pragdave/pdp11-playground",
@@ -8,6 +8,7 @@
   "docs": "https://github.com/pragdave/pdp11-playground/blob/main/README.md",
   "bugs": "https://github.com/pragdave/pdp11-playground/issues",
   "main": "src/pdp11_playground.js",
+  "type": "module",
   "scripts": {
     "dev": "parcel src/index.html",
     "dist": "rimraf dist && node ./esbuild.js"
