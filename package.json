@@ -1,21 +1,28 @@
 {
-  "name": "svelte-app",
-  "version": "1.0.0",
-  "private": true,
-  "entry": "src/main.js",
+  "name": "pdp11-playground",
+  "version": "1.0.4",
+  "license": "MIT",
+  "author": "Dave Thomas <dave@pragdave.me> (https://pragdave.me)",
+  "repository": "github:pragdave/pdp11-playground",
+  "home": "https://github.com/pragdave/pdp11-playground",
+  "docs": "https://github.com/pragdave/pdp11-playground/blob/main/README.md",
+  "bugs": "https://github.com/pragdave/pdp11-playground/issues",
+  "main": "src/pdp11_playground.js",
   "scripts": {
-    "dev": "parcel src/index.html"
+    "dev": "parcel src/index.html",
+    "dist": "rimraf dist && node ./esbuild.js"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.0.0-beta.2",
-    "eslint": "^7.22.0",
+    "esbuild": "^0.14.12",
+    "esbuild-sass-plugin": "^2.0.3",
+    "eslint": "^8.7.0",
     "eslint-config-minimal": "^0.4.2",
-    "sass": "^1.34.1"
+    "sass": "^1.49.0"
   },
   "dependencies": {
     "assets": "^3.0.1",
-    "codemirror": "^5.60.0",
-    "m11": "file:../m11",
+    "codemirror": "^5.65.1",
+    "pdp11-assembler-emulator": "pdp11-assembler-emulator",
     "redom": "^3.27.1"
   }
 }

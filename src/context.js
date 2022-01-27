@@ -1,4 +1,4 @@
-import { assemble, Emulator, MachineState } from "m11"
+import { assemble, Emulator, MachineState } from "pdp11-assembler-emulator"
 
 
 export const Format = {

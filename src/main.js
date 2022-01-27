@@ -1,6 +1,6 @@
 import "./assets/index.scss"
 
-import { PDPPlayground } from "./pdp_playground"
+import { PDP11Playground } from "./pdp11_playground"
 
 
 const defaultSource = 
@@ -40,5 +40,5 @@ if (!holders)
 
 console.log(holders)
 
-holders.forEach(h => new PDPPlayground(h, defaultSource))
+holders.forEach(h => new PDP11Playground(h, defaultSource))
 

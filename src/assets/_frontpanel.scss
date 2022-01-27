@@ -1,3 +1,8 @@
+@use "config";
+
+$fp-red: config.$fp-red;
+$fp-purple: config.$fp-purple;
+
 $border: $fp-red;
 $legend: lighten($fp-red, 20%);
 $register-color: lighten($fp-red, 35%);

@@ -2,12 +2,13 @@ import { Context    } from "./context.js"
 import { Editor     } from "./editor.js"
 import { FrontPanel } from "./front_panel"
 import { Logger     } from "./logger.js"
-import { PS         } from "../../m11"
+import { PS         } from "pdp11-assembler-emulator"
 
 
-export class PDPPlayground {
+export class PDP11Playground {
 
   constructor(holder, defaultSource) {
+    console.log("holder", holder)
     this.context = new Context(defaultSource, this.callbacks()) 
     this.locateElementsWeUse(holder)
     this.editor = new Editor(this.context, this.editTextEl)
@@ -98,7 +99,6 @@ export class PDPPlayground {
   }
 
   numberFormatChanged() {
-    console.log(this.context.fmt)
     this.frontPanel.redrawOnNumberFormatChange()
     this.editor.redrawOnNumberFormatChange()
   }

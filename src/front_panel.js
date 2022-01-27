@@ -1,6 +1,6 @@
 import { el, mount, setAttr, setChildren  } from "redom"
 import { Format }from "./context"
-import { PS } from "../../m11"
+import { PS } from "pdp11-assembler-emulator"
 
 class Status {
 
