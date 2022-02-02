@@ -1,11 +1,4 @@
 
-@media (min-width: 640px) {
-  main {
-    max-width: none;
-  }
-}
-
-
 .play-icon {
   color: #8d8;
   display: inline-block;
@@ -60,8 +53,7 @@
 }
 
 .CodeMirror {
-  font-family: 'JetBrains Mono', monospace !important;
-  height: 60vh;
+  font-family: 'Fira Code', monospace !important;
 }
 
 .CodeMirror-scroll {

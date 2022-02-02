@@ -8,7 +8,6 @@ import { PS         } from "pdp11-assembler-emulator"
 export class PDP11Playground {
 
   constructor(holder, defaultSource) {
-    console.log("holder", holder)
     this.context = new Context(defaultSource, this.callbacks()) 
     this.locateElementsWeUse(holder)
     this.editor = new Editor(this.context, this.editTextEl)
@@ -112,6 +111,13 @@ export class PDP11Playground {
   emtTtyout(msg) {
     console.info(`.ttyout: `, msg)
     this.logger.ttyout(msg)
+  }
+
+  // Hack? Nah... but there's a bug in CodeMirror that means we need to refresh the
+  // window if it is displayed in a dynamically sized container
+  refresh() {
+    console.log("refreshing")
+    setTimeout(() => this.editor.refresh(), 10)
   }
 }
 

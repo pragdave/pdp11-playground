@@ -1,7 +1,9 @@
-import CodeMirror from "codemirror/lib/codemirror"
-import "codemirror/theme/material-palenight.css"
-import "./editor/pdp11-mode"
-
+let CodeMirror = null;
+if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
+  CodeMirror  = require("codemirror/lib/codemirror")
+  require("codemirror/theme/material-palenight.css")
+  require("./editor/pdp11-mode")
+}
 
 
 const REBUILD_AFTER_IDLE_TIME = 350 // mS 
@@ -136,7 +138,6 @@ export class Editor {
     this.memoryByAddress = {}
     this.breakpoints = {}
 
-
     this.cm = CodeMirror.fromTextArea(elementToUse, {
       gutters:        [ `g-margin`, `g-address`, `g-w0`, `g-w1`, `g-w2`],
       indentWithTabs: true,
@@ -160,6 +161,7 @@ export class Editor {
     })
 
     this.cm.setValue(this.context.source)
+    window.Editor = this
   }
 
   // onChanged(parentCallback) {
@@ -351,5 +353,8 @@ export class Editor {
     this.markers = []
   }
 
+  refresh() {
+    this.cm.refresh()
+  }
 }
 
