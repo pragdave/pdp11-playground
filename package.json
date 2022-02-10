@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "assets": "^3.0.1",
-    "codemirror": "^5.65.1",
+    "codemirror-ssr": "^0.0.6",
     "pdp11-assembler-emulator": "pdp11-assembler-emulator",
     "redom": "^3.27.1",
     "shepherd.js": "^9.0.0"
