@@ -1,6 +1,6 @@
 {
   "name": "pdp11-playground",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "license": "MIT",
   "author": "Dave Thomas <dave@pragdave.me> (https://pragdave.me)",
   "repository": "github:pragdave/pdp11-playground",
@@ -27,12 +27,13 @@
     "eslint": "^8.7.0",
     "eslint-config-minimal": "^0.4.2",
     "sass": "^1.49.0",
+    "typescript": "^4.7.4",
     "vite": "^2.7.2"
   },
   "dependencies": {
     "assets": "^3.0.1",
     "codemirror-ssr": "^0.0.6",
-    "pdp11-assembler-emulator": "pdp11-assembler-emulator",
+    "pdp11-assembler-emulator": "^1.0.0",
     "redom": "^3.27.1",
     "shepherd.js": "^9.0.0"
   }
