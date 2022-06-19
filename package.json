@@ -1,6 +1,6 @@
 {
   "name": "pdp11-playground",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "license": "MIT",
   "author": "Dave Thomas <dave@pragdave.me> (https://pragdave.me)",
   "repository": "github:pragdave/pdp11-playground",
@@ -15,6 +15,7 @@
       "require": "./dist/pdp11_playground.umd.js"
     }
   },
+  "types": "./dist/pdp11_playground.d.ts", 
   "files": [
     "dist"
   ],
