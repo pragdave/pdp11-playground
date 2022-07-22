@@ -33,8 +33,8 @@
   },
   "dependencies": {
     "assets": "^3.0.1",
-    "codemirror-ssr": "^0.0.6",
-    "pdp11-assembler-emulator": "file:../pdp11-assembler-emulator",
+    "codemirror": "^6.0.1",
+    "pdp11-assembler-emulator": "github:pragdave/m11",
     "redom": "^3.27.1",
     "shepherd.js": "^9.0.0"
   }
