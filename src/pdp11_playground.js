@@ -1,7 +1,7 @@
-import { Context    } from "./context.js"
-import { Editor     } from "./editor.js"
+import { Context    } from "./context"
+import { Editor     } from "./editor"
 import { FrontPanel } from "./front_panel"
-import { Logger     } from "./logger.js"
+import { Logger     } from "./logger"
 import { PS         } from "pdp11-assembler-emulator"
 
 

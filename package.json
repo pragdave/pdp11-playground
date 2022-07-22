@@ -1,6 +1,6 @@
 {
   "name": "pdp11-playground",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "license": "MIT",
   "author": "Dave Thomas <dave@pragdave.me> (https://pragdave.me)",
   "repository": "github:pragdave/pdp11-playground",
@@ -15,7 +15,7 @@
       "require": "./dist/pdp11_playground.umd.js"
     }
   },
-  "types": "./dist/pdp11_playground.d.ts", 
+  "types": "./dist/pdp11_playground.d.ts",
   "files": [
     "dist"
   ],
@@ -34,7 +34,7 @@
   "dependencies": {
     "assets": "^3.0.1",
     "codemirror-ssr": "^0.0.6",
-    "pdp11-assembler-emulator": "^1.0.0",
+    "pdp11-assembler-emulator": "file:../pdp11-assembler-emulator",
     "redom": "^3.27.1",
     "shepherd.js": "^9.0.0"
   }

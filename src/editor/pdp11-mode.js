@@ -1,39 +1,6 @@
-/* Example definition of a simple mode that understands a subset of
- * JavaScript:
- */
-
-import CodeMirror from "codemirror/lib/codemirror"
-import "codemirror/addon/mode/simple"
-
-// Prism.languages.pdp11 = {
-
-
-//   'opcode': {
-//     pattern: opcodes,
-//     alias: `keyword`,
-//   },
-
-// cm-s-abcdef span.cm-keyword { color: darkgoldenrod; font-weight: bold; }
-// .cm-s-abcdef span.cm-atom { color: #77F; }
-// .cm-s-abcdef span.cm-number { color: violet; }
-// .cm-s-abcdef span.cm-def { color: #fffabc; }
-// .cm-s-abcdef span.cm-variable { color: #abcdef; }
-// .cm-s-abcdef span.cm-variable-2 { color: #cacbcc; }
-// .cm-s-abcdef span.cm-variable-3, .cm-s-abcdef span.cm-type { color: #def; }
-// .cm-s-abcdef span.cm-property { color: #fedcba; }
-// .cm-s-abcdef span.cm-operator { color: #ff0; }
-// .cm-s-abcdef span.cm-comment { color: #7a7b7c; font-style: italic;}
-// .cm-s-abcdef span.cm-string { color: #2b4; }
-// .cm-s-abcdef span.cm-meta { color: #C9F; }
-// .cm-s-abcdef span.cm-qualifier { color: #FFF700; }
-// .cm-s-abcdef span.cm-builtin { color: #30aabc; }
-// .cm-s-abcdef span.cm-bracket { color: #8a8a8a; }
-// .cm-s-abcdef span.cm-tag { color: #FFDD44; }
-// .cm-s-abcdef span.cm-attribute { color: #DDFF00; }
-// .cm-s-abcdef span.cm-error { color: #FF0000; }
-// .cm-s-abcdef span.cm-header { color: aquamarine; font-weight: bold; }
-// .cm-s-abcdef span.cm-link { color: blueviolet; }
-
+//  So... we hve to defer defining the mode until runtime
+//  which is an ugly hack in CodeMirror.
+// Here we just export that things the runtime needs
 
 const opcode_names =
   `\\b(?:` +
@@ -48,17 +15,27 @@ const opcode_names =
 
 const opcodes = new RegExp(opcode_names, `i`)
 
+const register           = `(r[0-7]|sp|pc)\\b`
+const register_autoinc   = `\\(${register}\\)\\+`
+const register_autodec   = `-\\(${register}\\)`
 
-CodeMirror.defineSimpleMode(`pdp11`, {
+const base_register      = `(${register_autodec})|(${register_autoinc})|(${register})`
+const register_deferred1 = `\\(${register}\\)`
+const register_all       =
+        `\\b(@?${base_register})|(${register_deferred1})\\b`
+
+export const mode_name = 'pdp11'
+export const mode_def = {
   start: [
-    { 
-      regex: /"..|'./, 
-      token: `string`, 
+
+    {
+      regex: /(\.asci[iz])(\s*)(.)(.*?\3)/,
+      token: [ "keyword", null, "string", "string" ]
     },
 
     {
-      regex: /\b(:?r[0-7])|sp|pc\b/i,
-      token: `atom`,
+      regex: new RegExp(register_all),
+      token: `builtin`,
     },
 
     { 
@@ -81,6 +58,11 @@ CodeMirror.defineSimpleMode(`pdp11`, {
       token: `number`,
     },
 
+    { 
+      regex: /(:?\^X)[0-9A-F]+/i,
+      token: `number`,
+    },
+
     {
       regex: /[-+*/!&]|-?\(|\)\+?/,
       token: `operator`,
@@ -88,7 +70,7 @@ CodeMirror.defineSimpleMode(`pdp11`, {
 
     {
       regex: /\.\w+/,
-      token: `def`,
+      token: `keyword`,
     },
 
     {
@@ -102,15 +84,24 @@ CodeMirror.defineSimpleMode(`pdp11`, {
     },
 
     {
+      regex: /#[a-z][a-z0-9$.]*/,
+      token: `name`,
+    },
+
+    {
       regex: /[a-z0-9$.]+/,
       token: `variable`,
     },
 
+    { 
+      regex: /"..|'./, 
+      token: `string`, 
+    },
   ], 
 
   meta: {
     dontIndentStates: [`comment`],
     lineComment: `;`,
   },
-})
+}
 

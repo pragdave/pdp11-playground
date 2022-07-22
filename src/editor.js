@@ -1,4 +1,6 @@
 
+import { mode_name, mode_def } from "./editor/pdp11-mode.js"
+
 // import "codemirror/addon/mode/simple"
 // I'm sure there's a better way, but I need to hndle all this inline in the browser,
 // so I can't do the import about, because CodeMiddor is not
@@ -211,84 +213,7 @@ function addLanguageInBrowser(CodeMirror) {
     };
   }
 
-  const opcode_names =
-    `\\b(?:` +
-      `adc|adcb|add|ash|ashc|asl|aslb|asr|asrb|bcc|bcs|beq|bge|bgt|bhi|` +
-      `bhis|bic|bicb|bis|bisb|bit|bitb|ble|blo|blos|blt|bmi|bne|bpl|bpt|br|` +
-      `bvc|bvs|ccc|clc|cln|clr|clrb|clv|clz|cmp|cmpb|com|comb|dec|decb|div|` +
-      `emt|halt|inc|incb|iot|jmp|jsr|mfpd|mfpi|mfps|mov|movb|mtpd|mtpi|mtps|mul|` +
-      `neg|negb|nop|reset|rol|rolb|ror|rorb|rti|rts|sbc|sbcb|scc|sec|sen|sev|` +
-      `sez|sob|Asub|swab|sxt|trap|tst|tstb|wait|xor` +
-      `)\\b`
-
-
-  const opcodes = new RegExp(opcode_names, `i`)
-
-
-  defineSimpleMode(`pdp11`, {
-    start: [
-      { 
-        regex: /"..|'./, 
-        token: `string`, 
-      },
-
-      {
-        regex: /\b(:?r[0-7])|sp|pc\b/i,
-        token: `atom`,
-      },
-
-      { 
-        regex: opcodes,
-        token: `keyword`,
-      },
-
-      { 
-        regex: /(:?\^O)?[0-7]+/i,
-        token: `number`,
-      },
-
-      { 
-        regex: /(:?\^B)[01]+/i,
-        token: `number`,
-      },
-
-      { 
-        regex: /(:?\^D)[0-9]+/i,
-        token: `number`,
-      },
-
-      {
-        regex: /[-+*/!&]|-?\(|\)\+?/,
-        token: `operator`,
-      },
-
-      {
-        regex: /\.\w+/,
-        token: `def`,
-      },
-
-      {
-        regex: /;.*/, 
-        token: `comment`,
-      },
-
-      {
-        regex: /[a-z0-9$.]+:/,
-        token: `label`,
-      },
-
-      {
-        regex: /[a-z0-9$.]+/,
-        token: `variable`,
-      },
-
-    ], 
-
-    meta: {
-      dontIndentStates: [`comment`],
-      lineComment: `;`,
-    },
-  })
+  defineSimpleMode(mode_name, mode_def)
 }
 
 // END OF DEFINE LANGUAGE
@@ -300,6 +225,7 @@ const REBUILD_AFTER_IDLE_TIME = 350 // mS
 
   function join(args) {
     return args
+      .filter(a => a)      // skip nulls
       .map(a => a.trim())
       .join(`\t`)
       .trimEnd()
