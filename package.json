@@ -26,11 +26,11 @@
   },
   "devDependencies": {
     "@lezer/generator": "^1.1.0",
+    "esbuild": "^0.14.50",
     "eslint": "^8.7.0",
     "eslint-config-minimal": "^0.4.2",
     "sass": "^1.49.0",
-    "typescript": "^4.7.4",
-    "vite": "3.0.3"
+    "typescript": "^4.7.4"
   },
   "dependencies": {
     "@codemirror/lang-javascript": "^6.0.2",
@@ -38,10 +38,9 @@
     "@codemirror/view": "6.1.1",
     "assets": "^3.0.1",
     "codemirror": "^6.0.1",
-    "esbuild": "^0.14.50",
-    "pdp11-assembler-emulator": "../pdp11-assembler-emulator/",
-    "redom": "^3.27.1",
-    "rollup-plugin-esbuild": "^4.9.1",
+    "pdp11-assembler-emulator": "../pdp11-assembler-emulator/"
+  },
+  "not-used": {
     "shepherd.js": "10.0.0"
   }
 }
