@@ -25,6 +25,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@lezer/generator": "^1.1.0",
     "eslint": "^8.7.0",
     "eslint-config-minimal": "^0.4.2",
     "sass": "^1.49.0",
@@ -34,10 +35,13 @@
   "dependencies": {
     "@codemirror/lang-javascript": "^6.0.2",
     "@codemirror/lang-json": "^6.0.0",
+    "@codemirror/view": "6.1.1",
     "assets": "^3.0.1",
     "codemirror": "^6.0.1",
-    "pdp11-assembler-emulator": "github:pragdave/m11",
+    "esbuild": "^0.14.50",
+    "pdp11-assembler-emulator": "../pdp11-assembler-emulator/",
     "redom": "^3.27.1",
+    "rollup-plugin-esbuild": "^4.9.1",
     "shepherd.js": "10.0.0"
   }
 }

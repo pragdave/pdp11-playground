@@ -1,25 +1,31 @@
-import { assemble, Emulator, MachineState } from "pdp11-assembler-emulator"
+import { assemble, Callbacks, Emulator, MachineState, SourceCode } from "pdp11-assembler-emulator"
 
 
 export const Format = {
-  octal(val) {
+  octal(val: number) {
     return val.toString(8).padStart(6, "0")
   },
-  decimal(val) {
+  decimal(val: number) {
     return val.toString()
   },
-  hex(val) {
+  hex(val: number) {
     return val.toString(16).padStart(4, "0")
   },
 }
-Format.octal.base = 8
-Format.decimal.base = 10
-Format.hex.base = 16
+// Format.octal.base = 8
+// Format.decimal.base = 10
+// Format.hex.base = 16
 
 export class Context {
 
-   constructor(source, callbacks) {
-     this.callbacks = callbacks
+  public fmt: (val: number) => string
+
+  machineState: MachineState
+  build: SourceCode
+  emulator: Emulator
+  runnable: boolean = false
+
+   constructor(public source: string, private callbacks: Callbacks) {
      this.build  = null
      this.fmt    = Format.octal
      this.machineState = new MachineState(this.callbacks)
@@ -38,12 +44,12 @@ export class Context {
     }
   }
 
-  setSource(source) {
+  setSource(source: string) {
     this.source = source
     this.reset()
   }
 
-  setNumberBase(base) {
+  setNumberBase(base: number) {
     switch (base) {
       case 8: 
         this.fmt = Format.octal
