@@ -1,5 +1,5 @@
 require('esbuild').build({
-  entryPoints: ['src/index.ts'],
+  entryPoints: ['src/standalone.tsx'],
   bundle: true,
-  outfile: 'pdp11-playground.js',
+  outfile: 'standalone.js',
 }).catch(() => process.exit(1))

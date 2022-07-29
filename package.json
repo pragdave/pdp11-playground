@@ -38,7 +38,8 @@
     "@codemirror/view": "6.1.1",
     "assets": "^3.0.1",
     "codemirror": "^6.0.1",
-    "pdp11-assembler-emulator": "../pdp11-assembler-emulator/"
+    "pdp11-assembler-emulator": "../pdp11-assembler-emulator/",
+    "preact": "^10.10.0"
   },
   "not-used": {
     "shepherd.js": "10.0.0"

@@ -8,9 +8,119 @@
 
     <!-- link rel='icon' type='image/png' href='/favicon.png' -->
     
-    <script defer type="module" src='./dist/pdp11-playground.js'></script>
+    <script defer type="module" src='./dist/standalone.js'></script>
 
+    <!--
+class="filter-switch inline-flex items-center relative h-10 p-1 space-x-1 bg-gray-300 rounded-md font-semibold text-blue-600 my-4">
+    -->
 <style>
+
+.playground-editor {
+  display: flex;
+  font-family: monospace;
+  gap: 0.5rem;
+  font-size: 1rem;
+  --line-height: 1.7em;
+  line-height: var(--line-height);
+}
+
+.playground-editor .cm-scroller {
+  line-height: var(--line-height);
+}
+
+.gutter {
+  min-width:  8rem;
+}
+
+.gutter-line-holder {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  width: 100%;
+  background: #fff8ff;
+  padding-left: 0.5em;
+}
+
+.gutter-line {
+  width: 100%;
+}
+
+.gutter-line .assignment-value {
+  display: inline-block;
+  text-align: right;
+  color: purple;
+  margin-right: 1em;
+}
+
+.gutter-line .address {
+  display: inline-block;
+  width: 2em;
+  color: blue;
+  margin-right: 1em;
+  vertical-align: top;
+}
+
+.gutter-line .generated-bytes {
+  display: inline-block;
+  width: 12em;
+  color: green;
+  margin-right: 1em;
+}
+
+.gutter-line .generated-bytes span {
+  display: inline-block;
+  width: 3em;
+  text-align: left;
+}
+
+.gutter-line-holder .line-number {
+  display: inline-block;
+  width: 3em;
+  text-align: right;
+  background: #abc;
+}
+
+.editor-panel {
+  min-width: 20rem;
+}
+
+.base-selector {
+	margin: 0 0 1.5rem; 
+  box-sizing: border-box;
+	font-size: 0;
+	display: flex; flex-flow: row nowrap;
+	justify-content: flex-start; align-items: stretch;
+}
+.base-selector  input {width: 0; height: 0; position: absolute; left: -9999px;}
+.base-selector	input + label {
+		margin: 0; padding: .25rem 1rem; box-sizing: border-box;
+		position: relative; display: inline-block;
+		border: solid 1px #DDD; background-color: #FFF;
+		font-size: 1rem; line-height: 140%; font-weight: 600; text-align: center;
+		box-shadow: 0 0 0 rgba(255,255,255,0);
+		transition: 	border-color .15s ease-out, 
+					color .25s ease-out, 
+					background-color .15s ease-out,
+					box-shadow .15s ease-out;
+}		
+		/* ADD THESE PROPERTIES TO SWITCH FROM AUTO WIDTH TO FULL WIDTH */
+		/*flex: 0 0 50%; display: flex; justify-content: center; align-items: center;*/
+		/* ----- */
+		
+.base-selector	input + label:first-of-type {border-radius: 6px 0 0 6px; border-right: none;}
+.base-selector	input + label:last-of-type {border-radius: 0 6px 6px 0; border-left: none;}
+.base-selector	input:hover + label {border-color: darkred;}
+.base-selector	input:checked + label {
+		background-color: red;
+		color: #FFF;
+		box-shadow: 0 0 10px rgba(200, 0, 0, 0.5);
+		border-color: red;
+		z-index: 1;
+	}
+.base-selector  input:focus + label {
+    outline: none;
+  }
+
 .pdp11-window {
   display: flex;
 }
@@ -52,17 +162,5 @@ p {
   </head>
 
   <body>
-    <div class="pdp11-window">
-      <div id="edit-wrapper">
-        <h4>The CodeView editor</h4>
-      </div>
-      <hr/>
-      <div id="assembled">
-        <h4>The result of the assembly</h4>
-        <pre id="log">
-        </pre>
-     </div>
-    </div>
-
   </body>
 </html>

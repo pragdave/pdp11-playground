@@ -1,6 +1,9 @@
 LANG = src/lang-pdp11
-TARGET = dist/pdp11-playground.js
-OTHER_SRC = $(wildcard src/*.ts)
+TARGET = dist/standalone.js
+OTHER_SRC = $(shell find src -name *.ts -o -name *.tsx) 
+
+
+STANDALONE = src/standalone.tsx
 
 default: $(TARGET)
 
@@ -15,9 +18,10 @@ $(LANG)/pdp11.terms.js $(LANG)/pdp11.js: node_modules $(LANG)/pdp11.grammar
 	yarn lezer-generator $(LANG)/pdp11.grammar -o $(LANG)/pdp11.js
 
 $(TARGET): $(LANG)/index.ts $(LANG)/pdp11.js $(OTHER_SRC)
-	yarn esbuild --bundle --outfile=$(TARGET) --sourcemap src/index.ts
+	yarn esbuild --bundle --outfile=$(TARGET) --sourcemap $(STANDALONE)
 
 watch:
+	${MAKE}
 	fswatch src | xargs -n1 -I{} $(MAKE)
 
 clean:

@@ -1,10 +1,18 @@
 {
   "include": ["src/**/*"],
   "compilerOptions": {
+    "baseUrl": "./",
     "allowJs": true,
     "declaration": true,
+    "declarationMap": true,
     "emitDeclarationOnly": true,
-    "outDir": "dist",
-    "declarationMap": true
+    "esModuleInterop": true,  
+    "jsx": "react",  
+    "jsxFactory": "h",  
+    "module": "commonjs",   
+    "outDir": "./dist",  
+    "skipLibCheck": true,
+    "strict": true,   
+    "target": "es6"
   }
 }
