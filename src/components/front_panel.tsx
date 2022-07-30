@@ -1,6 +1,8 @@
 import { h, Fragment } from "preact";
 import { ContextProps} from "./types"
-import { NumberFormatter, ValidBase } from "../number_formatter"
+import { ValidBase } from "./number"
+import { AllBases, Number } from "./number"
+import { NFContext } from "src/playground"
 
 import * as MachineState from "pdp11-assembler-emulator"
 
@@ -8,47 +10,50 @@ export interface FrontPanelCallbacks {
   step: () => void,
   run: () => void,
   reset: () => void,
-  setNumberFormat: (base: ValidBase) => void,
 }
 
 export interface FrontPanelProps extends ContextProps {
-  numberFormatter: NumberFormatter,
   setNumberFormat: (base: ValidBase) => void,
   callbacks: FrontPanelCallbacks,
 }
 
 let labelCount = 0
 
-export function OneBase(props: {base: number, checked?: boolean}) {
+export function OneBase(props: {base: number, checked?: boolean }) {
   const label = `l${labelCount++}`
   return (
     <Fragment>
-      <input id={label}type="radio" value={props.base} name="base" checked={props.checked}></input>
+      <input id={label} type="radio" value={props.base} name="base" checked={props.checked}></input>
       <label for={label}>{props.base}</label>
     </Fragment>
   )
 }
 
 interface BaseSelectProps {
-  notifyBaseChanged: (b: ValidBase) => void,
-  formatter: NumberFormatter,
 }
 
-export function BaseSelector(props: BaseSelectProps) {
-  const { formatter, notifyBaseChanged } = props
+export function BaseSelector(_props: BaseSelectProps) {
 
-  function baseChanged(event: Event) {
-    let newBase = parseInt((event.target as HTMLInputElement).value) as ValidBase
-    notifyBaseChanged(newBase)
+  function updateBaseFrom(e: Event, updateFn: (base: ValidBase) => void) {
+    const target = e.target as HTMLElement
+    if ("value" in target) {
+      const base = parseInt((target as HTMLInputElement).value) as ValidBase
+      updateFn(base)
+    }
   }
-
   return (<div class="Bases">
     Number base:
-    <div class="base-selector" onChange={baseChanged}>
-    <OneBase base={8}  checked={formatter.base == 8}/>
-    <OneBase base={10} checked={formatter.base == 10}/>
-    <OneBase base={16} checked={formatter.base == 16}/>
-    </div>
+        <NFContext.Consumer>
+         {([base, setBase])=>
+          <div class="base-selector" onClick={ e => updateBaseFrom(e, setBase) } >
+          {
+            AllBases.map((b) => 
+              <OneBase base={b}  checked={base == b}/>
+            )
+          }
+          </div>
+         }
+    </NFContext.Consumer>
   </div>)
 }
 
@@ -63,11 +68,11 @@ export function FrontPanel(props: FrontPanelProps) {
         <pre>
         {props.context.source}
         </pre>
-         <BaseSelector formatter={props.numberFormatter} notifyBaseChanged={props.callbacks.setNumberFormat}/>
+         <BaseSelector/>
           <div class="registers">
             <ul>
               { props.context.machineState.registers.registers.map((reg, i:number) =>
-                <li key={i.toString}>{props.numberFormatter.format(reg)}</li>
+                <li key={i.toString}><Number val={reg}/></li>
               )}
             </ul>
           </div>

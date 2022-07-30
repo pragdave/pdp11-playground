@@ -1,13 +1,10 @@
 import { h, createRef, Component, Fragment} from "preact";
-import { NumberFormatter } from "src/number_formatter";
 import { bytesIntoWords, Editor } from "../editor"
 import { ContextProps, ContextState } from "./types"
+import { Number} from "./number"
+
 import { AssignmentLine as ALT, BlankLine as BLT, CodegenLine as CLT, ErrorLine as ELT,
          SourceCode, SourceLine, LineType } from "pdp11-assembler-emulator"
-
-interface GutterProps {
-    lines: SourceCode,
-  }
 
 interface HandlerProps<T extends SourceLine> {
     line: T,
@@ -16,7 +13,7 @@ interface HandlerProps<T extends SourceLine> {
 function AssignmentLine(props: HandlerProps<ALT>) {
   const line = props.line
     return (<div class="gutter-line">
-      <span class="assignment-value">{line.value}</span>
+      <span class="assignment-value"><Number val={line.value}/></span>
     </div>)
 }
 
@@ -24,24 +21,28 @@ function BlankLine(_props: HandlerProps<BLT>) {
   return null
 }
 
-function generatedBytesFrom(address: number, bytes: number[]) {
+function generatedWordsFrom(address: number, bytes: number[]) {
     const words = bytesIntoWords(address, bytes)
-  return words.map((word) => <span>{word}</span>)
+  return words.map((word) => <span><Number val={word}/></span>)
 }
+
 function CodegenLine(props: HandlerProps<CLT>) {
   const line = props.line
   const address = line.address
   const bytes = line.generatedBytes
 
-    return (<div class="gutter-line">
-      <span class="address">{address}</span>
-      <div class="generated-bytes">{
-        generatedBytesFrom(address, bytes).map((byte, i) =>
-        <Fragment>
-          {byte}
-          { i % 3 == 2 && <br/>}
-        </Fragment>)
-      }</div>
+    return (
+    <div class="gutter-line">
+      <span class="address"><Number val={address}/></span>
+      <div class="generated-bytes">
+        {
+          generatedWordsFrom(address, bytes).map((byte) =>
+            <Fragment>
+              { byte }
+            </Fragment>
+          )
+        } 
+    </div>
     </div>)
 }
 
@@ -58,13 +59,18 @@ const LineTypeMap: LineTypeMapType = {
   ErrorLine,
 }
 
-function GutterLine(props: {line: SourceLine}) {
+function GutterLine(props: {line: SourceLine }) {
   const line = props.line
   const height = `calc(${line.height_in_lines}*var(--line-height))`
   const Handler = LineTypeMap[line.type]
   return (<div class="gutter-line-holder" style={{height: height}}>
-     <Handler line={line}/>
+     <Handler line={line} />
   </div>)
+}
+
+
+interface GutterProps {
+  lines: SourceCode,
 }
 
 function Gutter(props: GutterProps) {
@@ -74,6 +80,7 @@ function Gutter(props: GutterProps) {
     {lines.map(line => <GutterLine line={line} />)}
   </div>)
 }
+
 export interface EditorProps extends ContextProps {
   sourceUpdated: (newSource: string) => SourceCode,
 }
@@ -86,8 +93,7 @@ export class EditorPanel extends Component<EditorProps, ContextState> {
   }
 
   sourceCodeChanged(newSource:string) {
-    if (this.props.sourceUpdated)
-        return this.props.sourceUpdated(newSource)
+    return this.props.sourceUpdated(newSource)
   }
 
   componentDidMount() {
@@ -100,7 +106,7 @@ export class EditorPanel extends Component<EditorProps, ContextState> {
   render() {
   return (
     <div class="playground-editor">
-    <Gutter lines={this.props.context.build}/>
+    <Gutter lines={this.props.context.build} />
     <div ref={this.panelElement} class="editor-panel" />
     </div>
   )

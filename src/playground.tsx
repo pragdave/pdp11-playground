@@ -1,12 +1,16 @@
-import { createContext, h } from "preact";
-import { useContext, useRef, useState } from "preact/hooks";
+import { h } from "preact";
+import { useRef, useState } from "preact/hooks";
+import { createContext } from "preact/compat"
 import { FrontPanel } from "./components/front_panel"
 import { EditorPanel } from "./components/editor_panel" 
 import { LoggerPanel } from "./components/logger_panel" 
 import { LoggerCallbacks } from "./components/types"
+import { ValidBase } from "./components/number"
 
 import { Context } from "./context"
-import { NumberFormatter, ValidBase } from "./number_formatter";
+
+export type NFUpdateBaseCallback = (base: ValidBase) => void
+export type NFStateType = [ base: number, setBase: NFUpdateBaseCallback ]
 
 const defaultSource = 
 `; Convert number in r0 to octal string in _buff_
@@ -19,9 +23,9 @@ buff:   .word   1, 2, 3, 4, 5
 .end    start
 `
 
-export function PlaygroundComponent() {
+export const NFContext = createContext<NFStateType>([ 16, () => {}])
 
-  const [ numberFormatter, setNumberFormatter ] = useState(new NumberFormatter(16) )
+export function PlaygroundComponent() {
 
   // callbacks from the emulator to the console logger
   const loggerRef = useRef<LoggerCallbacks>(null)
@@ -45,14 +49,11 @@ export function PlaygroundComponent() {
     return newContext.build
   }
 
-  // callbacks from the frontpanel
+  // handle the global number base
+  const nfState = useState(16)
+
 
   const fp_callbacks = {
-    setNumberFormat(base: ValidBase) {
-      numberFormatter.base = base   // hack for the editor...
-      setNumberFormatter(new NumberFormatter(base))
-    },
-
     step() {
       const newEmulatorState = context.emulator.step()
       setContext({...context, machineState: newEmulatorState })
@@ -69,10 +70,12 @@ export function PlaygroundComponent() {
   }
     
   return (
+    <NFContext.Provider value={nfState}>
     <div class="playground">
-        <FrontPanel  context={context} numberFormatter={numberFormatter} callbacks={fp_callbacks}/>
-        <EditorPanel context={context} numberFormatter={numberFormatter} sourceUpdated={sourceUpdated} />
-        <LoggerPanel context={context} numberFormatter={numberFormatter} ref={loggerRef}/>
+        <FrontPanel  context={context}  callbacks={fp_callbacks}/>
+        <EditorPanel context={context}  sourceUpdated={sourceUpdated} />
+        <LoggerPanel context={context}  ref={loggerRef}/>
     </div>
+    </NFContext.Provider>
   )
 }
